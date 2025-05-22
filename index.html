@@ -205,10 +205,28 @@
           transform: translateY(0);
         }
       }
+      @media (hover: none) and (pointer: coarse) {
+        body {
+          align-items: flex-start;
+          padding-top: 20px;
+        }
+
+        #textContainer {
+          font-size: 24px;
+          margin: 20px 0;
+        }
+
+        .container {
+          transition: transform 0.3s ease;
+        }
+
+        .keyboard-open .container {
+          transform: translateY(-40vh);
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Same HTML structure as previous version -->
     <div class="container">
       <button id="startBtn" class="btn">Start Test [Enter]</button>
       <button id="pauseBtn" class="btn hidden">Pause [ESC]</button>
@@ -237,7 +255,27 @@
     </div>
 
     <script>
-      // Updated JavaScript with bug fixes and new features
+      let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      let visualViewport = window.visualViewport;
+
+      if (isMobile && visualViewport) {
+        visualViewport.addEventListener("resize", () => {
+          const container = document.querySelector(".container");
+          if (visualViewport.height < window.innerHeight * 0.7) {
+            container.classList.add("keyboard-open");
+          } else {
+            container.classList.remove("keyboard-open");
+          }
+        });
+      }
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          if (e.scale !== 1) e.preventDefault();
+        },
+        { passive: false }
+      );
+
       const texts = [
         "Swell bananas, jazz cats! Let's twist again like we did last summer!",
         "Hot diggity dog! The Charleston is the bee's knees, daddy-o!",
@@ -412,7 +450,6 @@
         }
       }
 
-      // Event Listeners
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && isTestActive) togglePause();
         else if (e.key === "Enter" && !isTestActive) startCountdown();
