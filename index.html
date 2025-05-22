@@ -469,16 +469,34 @@
       const overlay = document.getElementById("animation-overlay");
       const comicTexts = ["BANG!", "POW!", "WHAM!", "ZAP!", "BOOM!"];
 
+      const vintageColors = [
+        "#704214", // sepia
+        "#d72a2a", // muted red
+        "#3c8242", // muted green
+        "#a67b5b", // brownish tan
+        "#ffd700", // mustard yellow
+        "#c49e60", // antique gold
+        "#c1440e", // burnt orange
+        "#8b5e3c", // walnut
+        "#aa6c39", // vintage copper
+      ];
+
       function spawnComic() {
         const el = document.createElement("div");
         el.className = "comic-text";
         el.textContent =
           comicTexts[Math.floor(Math.random() * comicTexts.length)];
-        // random on-screen position
+
+        // Position
         el.style.left = Math.random() * (window.innerWidth - 200) + "px";
         el.style.top = Math.random() * (window.innerHeight - 100) + "px";
-        // random theme color
-        el.style.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+        // Apply vintage style
+        el.style.color =
+          vintageColors[Math.floor(Math.random() * vintageColors.length)];
+        el.style.fontSize = `${Math.random() * 1.5 + 2.5}rem`; // 2.5–4rem
+        el.style.transform = `rotate(${Math.random() * 30 - 15}deg)`; // -15° to +15°
+
         overlay.appendChild(el);
         setTimeout(() => overlay.removeChild(el), 1500);
       }
