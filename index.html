@@ -2,19 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Type Inked</title>
+    <title>Type Inked Pro</title>
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <button id="pauseBtn">Pause [ESC]</button>
+    <div class="container">
+      <button id="startBtn" class="btn">Start Test [Enter]</button>
+      <button id="pauseBtn" class="btn hidden">Pause [ESC]</button>
 
-    <div id="stats">
-      <div>WPM: <span id="wpm">0</span></div>
-      <div>Accuracy: <span id="accuracy">100</span>%</div>
-      <div>Time: <span id="time">0</span>s</div>
+      <div id="countdown" class="hidden"></div>
+
+      <div id="stats" class="hidden">
+        <div>WPM: <span id="wpm">0</span></div>
+        <div>Accuracy: <span id="accuracy">100</span>%</div>
+        <div>Time: <span id="time">0</span>s</div>
+      </div>
+
+      <div id="textContainer" class="hidden"></div>
+
+      <div id="completionScreen" class="hidden">
+        <h2>Test Complete! 🎉</h2>
+        <div class="final-stats">
+          <p>Final WPM: <span id="finalWpm">0</span></p>
+          <p>Accuracy: <span id="finalAccuracy">0</span>%</p>
+          <p>Time: <span id="finalTime">0</span>s</p>
+        </div>
+        <button id="restartBtn" class="btn">Try Again [Enter]</button>
+      </div>
+
+      <div id="pauseOverlay" class="hidden">PAUSED</div>
     </div>
-
-    <div id="textContainer"></div>
 
     <script src="js/main.js"></script>
   </body>
