@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vintage Type Inked</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff5d1;
+        --sepia: #704214;
+        --red: #d72a2a;
+        --green: #3c8242;
+        --yellow: #ffd700;
+      }
+
+      body {
+        background: repeating-linear-gradient(
+          45deg,
+          #f0e6d3,
+          #f0e6d3 2px,
+          #e8ddc9 2px,
+          #e8ddc9 4px
+        );
+        font-family: "Carter One", cursive;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--sepia);
+        position: relative;
+        overflow: hidden;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==");
+        opacity: 0.15;
+        pointer-events: none;
+      }
+
+      .container {
+        max-width: 800px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn {
+        background: var(--red);
+        color: var(--cream);
+        padding: 15px 30px;
+        border: 3px solid var(--sepia);
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 20px;
+        transition: all 0.3s ease;
+        margin: 15px;
+        font-family: "Bangers", cursive;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 0 var(--sepia);
+        box-shadow: 5px 5px 0 var(--sepia);
+      }
+
+      .btn:hover {
+        transform: translate(2px, 2px);
+        box-shadow: 3px 3px 0 var(--sepia);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      #stats {
+        font-size: 24px;
+        margin: 30px 0;
+        background: var(--cream);
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid var(--sepia);
+        box-shadow: 5px 5px 0 var(--sepia);
+      }
+
+      #textContainer {
+        font-size: 32px;
+        line-height: 1.5;
+        margin: 40px 0;
+        padding: 30px;
+        background: var(--cream);
+        border-radius: 15px;
+        border: 3px solid var(--sepia);
+        box-shadow: 5px 5px 0 var(--sepia);
+        user-select: none;
+      }
+
+      .letter {
+        transition: all 0.1s ease;
+        position: relative;
+        padding: 0 2px;
+      }
+
+      .correct {
+        color: var(--green);
+        animation: bounce 0.3s ease;
+      }
+
+      .current {
+        background: var(--yellow);
+        border-radius: 5px;
+        animation: pulse 1s infinite;
+      }
+
+      .incorrect {
+        color: var(--red);
+        animation: shake 0.5s;
+        border-bottom: 3px solid var(--red);
+      }
+
+      #countdown {
+        font-size: 72px;
+        font-weight: bold;
+        color: var(--red);
+        margin: 40px 0;
+        text-shadow: 3px 3px 0 var(--sepia);
+        font-family: "Bangers", cursive;
+      }
+
+      #completionScreen {
+        background: var(--cream);
+        padding: 40px;
+        border-radius: 20px;
+        border: 3px solid var(--sepia);
+        box-shadow: 10px 10px 0 var(--sepia);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+      }
+
+      #pauseOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 245, 209, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 72px;
+        color: var(--red);
+        font-family: "Bangers", cursive;
+        text-shadow: 5px 5px 0 var(--sepia);
+        z-index: 999;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Same HTML structure as previous version -->
+    <div class="container">
+      <button id="startBtn" class="btn">Start Test [Enter]</button>
+      <button id="pauseBtn" class="btn hidden">Pause [ESC]</button>
+
+      <div id="countdown" class="hidden"></div>
+
+      <div id="stats" class="hidden">
+        <div>WPM: <span id="wpm">0</span></div>
+        <div>Accuracy: <span id="accuracy">100</span>%</div>
+        <div>Time: <span id="time">0</span>s</div>
+      </div>
+
+      <div id="textContainer" class="hidden"></div>
+
+      <div id="completionScreen" class="hidden">
+        <h2>Test Complete! 🎉</h2>
+        <div class="final-stats">
+          <p>Final WPM: <span id="finalWpm">0</span></p>
+          <p>Accuracy: <span id="finalAccuracy">0</span>%</p>
+          <p>Time: <span id="finalTime">0</span>s</p>
+        </div>
+        <button id="restartBtn" class="btn">Try Again [Enter]</button>
+      </div>
+
+      <div id="pauseOverlay" class="hidden">PAUSED</div>
+    </div>
+
+    <script>
+      // Updated JavaScript with bug fixes and new features
+      const texts = [
+        "Swell bananas, jazz cats! Let's twist again like we did last summer!",
+        "Hot diggity dog! The Charleston is the bee's knees, daddy-o!",
+        "Twenty-three skidoo! Flappers and fellas, let's paint the town red!",
+        "Putting on the Ritz! Those darb sheiks really know how to toddle!",
+        "No soap radio! Let's beat our gums over some giggle water, see?",
+      ];
+
+      let currentText = "";
+      let currentIndex = 0;
+      let startTime, pauseTime, timerInterval;
+      let isPaused = false;
+      let isTestActive = false;
+      let totalTyped = 0;
+      let correctTyped = 0;
+
+      const elements = {
+        startBtn: document.getElementById("startBtn"),
+        pauseBtn: document.getElementById("pauseBtn"),
+        stats: document.getElementById("stats"),
+        textContainer: document.getElementById("textContainer"),
+        countdown: document.getElementById("countdown"),
+        completionScreen: document.getElementById("completionScreen"),
+        pauseOverlay: document.getElementById("pauseOverlay"),
+        wpm: document.getElementById("wpm"),
+        accuracy: document.getElementById("accuracy"),
+        time: document.getElementById("time"),
+        finalWpm: document.getElementById("finalWpm"),
+        finalAccuracy: document.getElementById("finalAccuracy"),
+        finalTime: document.getElementById("finalTime"),
+        restartBtn: document.getElementById("restartBtn"),
+      };
+
+      function initTest() {
+        currentText = texts[Math.floor(Math.random() * texts.length)];
+        currentIndex = 0;
+        totalTyped = 0;
+        correctTyped = 0;
+        elements.textContainer.innerHTML = "";
+
+        currentText.split("").forEach((char) => {
+          const span = document.createElement("span");
+          span.textContent = char;
+          span.classList.add("letter");
+          elements.textContainer.appendChild(span);
+        });
+      }
+
+      function startCountdown() {
+        let count = 3;
+        elements.countdown.textContent = count;
+        elements.countdown.classList.remove("hidden");
+
+        const countdownInterval = setInterval(() => {
+          count--;
+          elements.countdown.textContent = count || "GO!";
+
+          if (count <= 0) {
+            clearInterval(countdownInterval);
+            elements.countdown.classList.add("hidden");
+            startTest();
+          }
+        }, 1000);
+      }
+
+      function startTest() {
+        isTestActive = true;
+        elements.stats.classList.remove("hidden");
+        elements.textContainer.classList.remove("hidden");
+        elements.pauseBtn.classList.remove("hidden");
+        startTime = Date.now();
+        startTimer();
+        updateCurrentLetter();
+      }
+
+      function startTimer() {
+        timerInterval = setInterval(() => {
+          const elapsed = Math.floor((Date.now() - startTime) / 1000);
+          elements.time.textContent = elapsed;
+
+          const minutes = elapsed / 60;
+          const wpm = Math.round(correctTyped / 5 / minutes) || 0;
+          elements.wpm.textContent = wpm;
+
+          const accuracy =
+            totalTyped > 0
+              ? Math.round((correctTyped / totalTyped) * 100)
+              : 100;
+          elements.accuracy.textContent = accuracy;
+        }, 1000);
+      }
+
+      function handleTyping(e) {
+        if (!isTestActive || isPaused) return;
+        if (["Shift", "Control", "Alt", "Meta", "CapsLock"].includes(e.key))
+          return;
+
+        const currentLetter = elements.textContainer.children[currentIndex];
+
+        if (e.key === "Backspace") {
+          if (currentIndex > 0) {
+            const prevLetter =
+              elements.textContainer.children[currentIndex - 1];
+            prevLetter.classList.remove("correct", "incorrect");
+            currentIndex--;
+            if (prevLetter.classList.contains("correct")) correctTyped--;
+            totalTyped = Math.max(totalTyped - 1, 0);
+            updateCurrentLetter();
+          }
+          return;
+        }
+
+        if (e.key.length === 1) {
+          totalTyped++;
+
+          if (e.key === currentLetter.textContent) {
+            currentLetter.classList.add("correct");
+            correctTyped++;
+            currentLetter.classList.remove("incorrect");
+            currentIndex++;
+            updateCurrentLetter();
+          } else {
+            currentLetter.classList.add("incorrect");
+            currentLetter.style.animation = "shake 0.5s";
+          }
+
+          if (currentIndex >= currentText.length) {
+            finishTest();
+          }
+        }
+      }
+
+      function updateCurrentLetter() {
+        elements.textContainer
+          .querySelectorAll(".current")
+          .forEach((el) => el.classList.remove("current"));
+        if (currentIndex < elements.textContainer.children.length) {
+          elements.textContainer.children[currentIndex].classList.add(
+            "current"
+          );
+        }
+      }
+
+      function finishTest() {
+        clearInterval(timerInterval);
+        isTestActive = false;
+        elements.stats.classList.add("hidden");
+        elements.textContainer.classList.add("hidden");
+        elements.pauseBtn.classList.add("hidden");
+
+        elements.finalWpm.textContent = elements.wpm.textContent;
+        elements.finalAccuracy.textContent = elements.accuracy.textContent;
+        elements.finalTime.textContent = elements.time.textContent;
+        elements.completionScreen.classList.remove("hidden");
+      }
+
+      function togglePause() {
+        if (!isTestActive) return;
+
+        isPaused = !isPaused;
+        elements.pauseOverlay.classList.toggle("hidden", !isPaused);
+        elements.pauseBtn.textContent = isPaused
+          ? "Resume [ESC]"
+          : "Pause [ESC]";
+
+        if (isPaused) {
+          pauseTime = Date.now();
+          clearInterval(timerInterval);
+        } else {
+          startTime += Date.now() - pauseTime;
+          startTimer();
+        }
+      }
+
+      // Event Listeners
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isTestActive) togglePause();
+        else if (e.key === "Enter" && !isTestActive) startCountdown();
+        else if (isTestActive && !isPaused) handleTyping(e);
+      });
+
+      elements.startBtn.addEventListener("click", () => {
+        elements.startBtn.classList.add("hidden");
+        initTest();
+        startCountdown();
+      });
+
+      elements.restartBtn.addEventListener("click", () => {
+        elements.completionScreen.classList.add("hidden");
+        elements.startBtn.classList.remove("hidden");
+        initTest();
+      });
+
+      initTest();
+    </script>
+  </body>
+</html>
