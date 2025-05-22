@@ -356,12 +356,36 @@
       body.theme-bw .comic-text {
         animation: bwTextEffect 1.2s ease forwards;
         filter: contrast(1.5);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
       }
 
       /* 70s theme comic text */
       body.theme-70s .comic-text {
         animation: seventiesTextEffect 1.8s ease forwards;
         text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Settings close button */
+      .settings-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--red);
+        color: var(--cream);
+        border: 2px solid var(--sepia);
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .settings-close:hover {
+        transform: scale(1.1);
       }
 
       /* Animations */
@@ -530,6 +554,7 @@
 
     <!-- Settings Panel -->
     <div class="settings-panel">
+      <div class="settings-close" onclick="toggleSettings()">×</div>
       <h3>Font Settings</h3>
       <div class="font-option" onclick="setFont('original')">
         Original Style
@@ -542,7 +567,9 @@
     <!-- Main Game Container -->
     <div class="container">
       <button id="startBtn" class="btn">Start Test [Enter]</button>
-      <button id="pauseBtn" class="btn hidden">Pause [ESC]</button>
+      <button id="pauseBtn" class="btn hidden" onclick="togglePause()">
+        Pause [ESC]
+      </button>
       <div id="countdown" class="hidden"></div>
       <div id="stats" class="hidden">
         <div>WPM: <span id="wpm">0</span></div>
@@ -833,6 +860,12 @@
         togglePause();
       });
 
+      // Add touch event for mobile pause button
+      elements.pauseBtn.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        togglePause();
+      });
+
       elements.startBtn.addEventListener("click", () => {
         elements.startBtn.classList.add("hidden");
         initTest();
@@ -858,17 +891,45 @@
         "SMASH!",
       ];
 
-      const vintageColors = [
-        "#704214", // sepia
-        "#d72a2a", // muted red
-        "#3c8242", // muted green
-        "#a67b5b", // brownish tan
-        "#ffd700", // mustard yellow
-        "#c49e60", // antique gold
-        "#c1440e", // burnt orange
-        "#8b5e3c", // walnut
-        "#aa6c39", // vintage copper
-      ];
+      // Theme-specific color sets
+      const themeColors = {
+        comic: [
+          "#704214", // sepia
+          "#d72a2a", // muted red
+          "#3c8242", // muted green
+          "#a67b5b", // brownish tan
+          "#ffd700", // mustard yellow
+          "#c49e60", // antique gold
+          "#c1440e", // burnt orange
+          "#8b5e3c", // walnut
+          "#aa6c39", // vintage copper
+        ],
+        bw: [
+          "#000000", // black
+          "#333333", // dark gray
+          "#666666", // medium gray
+          "#999999", // light gray
+          "#111111", // very dark gray
+          "#444444", // dark gray 2
+          "#777777", // medium gray 2
+        ],
+        "70s": [
+          "#8B4513", // saddle brown
+          "#A0522D", // sienna
+          "#CD853F", // peru
+          "#D2B48C", // tan
+          "#DEB887", // burlywood
+          "#F4A460", // sandy brown
+          "#DAA520", // goldenrod
+          "#B8860B", // dark goldenrod
+        ],
+      };
+
+      function getCurrentTheme() {
+        if (document.body.classList.contains("theme-bw")) return "bw";
+        if (document.body.classList.contains("theme-70s")) return "70s";
+        return "comic";
+      }
 
       function spawnComic() {
         const el = document.createElement("div");
@@ -880,9 +941,10 @@
         el.style.left = Math.random() * (window.innerWidth - 200) + "px";
         el.style.top = Math.random() * (window.innerHeight - 100) + "px";
 
-        // Apply vintage styling
-        el.style.color =
-          vintageColors[Math.floor(Math.random() * vintageColors.length)];
+        // Apply theme-specific colors
+        const currentTheme = getCurrentTheme();
+        const colors = themeColors[currentTheme];
+        el.style.color = colors[Math.floor(Math.random() * colors.length)];
         el.style.fontSize = `${Math.random() * 1.5 + 2.5}rem`;
         el.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
 
