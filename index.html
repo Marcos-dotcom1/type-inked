@@ -1,23 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="icon" type="image/png" href="images/Faviconcomic.jpg" />
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/png"
+      href="images/Faviconcomic.jpg"
+    />
     <meta charset="UTF-8" />
     <meta name="google" content="notranslate" />
     <title>Type Inked</title>
     <link
-      href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=Carter+One&family=Press+Start+2P&family=Rubik+Wet+Paint&display=swap"
       rel="stylesheet"
     />
+
     <style>
+      /* Base Theme Variables */
       :root {
         --cream: #fff5d1;
         --sepia: #704214;
         --red: #d72a2a;
         --green: #3c8242;
         --yellow: #ffd700;
+        --animation-style: comic-bounce;
       }
-      /* ————— Base Body & Texture ————— */
+
+      /* Black & White Theme */
+      body.theme-bw {
+        --cream: #f0f0f0;
+        --sepia: #111;
+        --red: #777;
+        --green: #555;
+        --yellow: #999;
+        --animation-style: bw-flicker;
+      }
+
+      body.theme-bw::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.1) 0px,
+          rgba(0, 0, 0, 0.1) 2px,
+          transparent 2px,
+          transparent 4px
+        );
+        animation: smoke 4s linear infinite;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      /* 70s Theme */
+      body.theme-70s {
+        --cream: #f4ecd8;
+        --sepia: #5a4d41;
+        --red: #c2a87f;
+        --green: #a18f6a;
+        --yellow: #d2b48c;
+        --animation-style: seventies-slide;
+      }
+
+      body.theme-70s::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: repeating-radial-gradient(
+          circle at 50% 50%,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.1) 1px,
+          rgba(0, 0, 0, 0.1) 1px,
+          rgba(0, 0, 0, 0.1) 3px
+        );
+        animation: static 0.2s infinite;
+        pointer-events: none;
+        z-index: 999;
+      }
+
+      /* Base Body & Texture */
       body {
         background: repeating-linear-gradient(
           45deg,
@@ -35,7 +96,9 @@
         color: var(--sepia);
         overflow: hidden;
         position: relative;
+        transition: font-family 0.3s;
       }
+
       body::after {
         content: "";
         position: fixed;
@@ -46,14 +109,103 @@
         pointer-events: none;
       }
 
-      /* ————— Your Main Container ————— */
+      /* Theme Selector */
+      #theme-selector {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+        padding: 10px 15px;
+        font-size: 18px;
+        font-family: "Carter One", cursive;
+        background: var(--cream);
+        color: var(--sepia);
+        border: 3px solid var(--sepia);
+        border-radius: 8px;
+        box-shadow: 4px 4px 0 var(--sepia);
+        appearance: none;
+        cursor: pointer;
+        background-image: url("data:image/svg+xml;utf8,<svg fill='%23704114' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+      }
+
+      /* Settings Panel */
+      .settings-panel {
+        position: fixed;
+        right: -250px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--cream);
+        padding: 20px;
+        border: 3px solid var(--sepia);
+        border-radius: 15px 0 0 15px;
+        box-shadow: -5px 5px 0 var(--sepia);
+        transition: right 0.3s;
+        z-index: 1000;
+      }
+
+      .settings-panel.open {
+        right: 0;
+      }
+
+      .settings-toggle {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        writing-mode: vertical-rl;
+        padding: 15px 8px;
+        border-radius: 0 8px 8px 0;
+        background: var(--red);
+        color: var(--cream);
+        cursor: pointer;
+        border: 2px solid var(--sepia);
+        font-family: "Bangers", cursive;
+        text-shadow: 1px 1px 0 var(--sepia);
+      }
+
+      .font-option {
+        margin: 10px 0;
+        padding: 8px;
+        border: 2px solid var(--sepia);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: var(--cream);
+      }
+
+      .font-option:hover {
+        background: var(--yellow);
+        transform: translate(1px, 1px);
+      }
+
+      /* Font Classes */
+      .font-original {
+        font-family: "Carter One", cursive;
+      }
+
+      .font-arial {
+        font-family: Arial, sans-serif;
+      }
+
+      .font-surprise {
+        font-family: "Rubik Wet Paint", cursive;
+      }
+
+      .font-surprise .btn {
+        font-family: "Press Start 2P", cursive;
+      }
+
+      /* Main Container */
       .container {
         max-width: 800px;
         width: 90%;
         text-align: center;
         position: relative;
-        z-index: 1; /* above texture */
+        z-index: 1;
       }
+
       .btn {
         background: var(--red);
         color: var(--cream);
@@ -69,15 +221,17 @@
         box-shadow: 5px 5px 0 var(--sepia);
         transition: transform 0.2s, box-shadow 0.2s;
       }
+
       .btn:hover {
         transform: translate(2px, 2px);
         box-shadow: 3px 3px 0 var(--sepia);
       }
+
       .hidden {
         display: none !important;
       }
 
-      /* ————— Stats & Text Container ————— */
+      /* Stats & Text Container */
       #stats {
         font-size: 24px;
         margin: 30px 0;
@@ -87,6 +241,7 @@
         border: 3px solid var(--sepia);
         box-shadow: 5px 5px 0 var(--sepia);
       }
+
       #textContainer {
         font-size: 32px;
         line-height: 1.5;
@@ -98,27 +253,31 @@
         box-shadow: 5px 5px 0 var(--sepia);
         user-select: none;
       }
+
       .letter {
         position: relative;
         padding: 0 2px;
         transition: all 0.1s;
       }
+
       .correct {
         color: var(--green);
         animation: bounce 0.3s ease;
       }
+
       .incorrect {
         color: var(--red);
         animation: shake 0.5s;
         border-bottom: 3px solid var(--red);
       }
+
       .current {
         background: var(--yellow);
         border-radius: 5px;
         animation: pulse 1s infinite;
       }
 
-      /* ————— Countdown & Completion Overlay ————— */
+      /* Countdown & Completion Overlay */
       #countdown {
         font-size: 72px;
         font-weight: bold;
@@ -127,6 +286,7 @@
         text-shadow: 3px 3px 0 var(--sepia);
         font-family: "Bangers", cursive;
       }
+
       #completionScreen {
         background: var(--cream);
         padding: 40px;
@@ -138,6 +298,7 @@
         transform: translate(-50%, -50%);
         z-index: 1000;
       }
+
       #pauseOverlay {
         position: fixed;
         inset: 0;
@@ -152,48 +313,14 @@
         z-index: 999;
       }
 
-      /* ————— Animations ————— */
-      @keyframes pulse {
-        0%,
-        100% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-      }
-      @keyframes shake {
-        0%,
-        100% {
-          transform: translateX(0);
-        }
-        25% {
-          transform: translateX(-5px);
-        }
-        50% {
-          transform: translateX(5px);
-        }
-        75% {
-          transform: translateX(-5px);
-        }
-      }
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(-5px);
-        }
-      }
-
-      /* ————— COMIC TEXT OVERLAY ————— */
+      /* Comic Animation Overlay */
       #animation-overlay {
         position: fixed;
         inset: 0;
         pointer-events: none;
-        z-index: 2; /* above your .container */
+        z-index: 2;
       }
+
       .comic-text {
         position: absolute;
         font-family: "Bangers", cursive;
@@ -202,6 +329,8 @@
         animation: popAndFade 1.5s ease forwards;
         user-select: none;
       }
+
+      /* Animations */
       @keyframes popAndFade {
         0% {
           opacity: 0;
@@ -219,13 +348,123 @@
           transform: scale(0) rotate(0);
         }
       }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      @keyframes comic-bounce {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      @keyframes bw-flicker {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes seventies-slide {
+        0% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        100% {
+          transform: translateX(-5px);
+        }
+      }
+
+      @keyframes smoke {
+        0% {
+          transform: translateY(0);
+          opacity: 0.2;
+        }
+        100% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+      }
+
+      @keyframes static {
+        0% {
+          background-size: 100% 100%;
+        }
+        50% {
+          background-size: 105% 105%;
+        }
+        100% {
+          background-size: 100% 100%;
+        }
+      }
     </style>
   </head>
+
   <body>
-    <!-- 🎉 COMIC TEXTS WILL BE APPENDED HERE -->
+    <!-- Comic Animation Overlay -->
     <div id="animation-overlay"></div>
 
-    <!-- your existing UI -->
+    <!-- Theme Selector -->
+    <select id="theme-selector">
+      <option value="comic">Comic</option>
+      <option value="bw">Black & White</option>
+      <option value="70s">70s TV</option>
+    </select>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+      <h3>Font Settings</h3>
+      <div class="font-option" onclick="setFont('original')">
+        Original Style
+      </div>
+      <div class="font-option" onclick="setFont('arial')">Clean Arial</div>
+      <div class="font-option" onclick="setFont('surprise')">Surprise Me!</div>
+    </div>
+    <div class="settings-toggle" onclick="toggleSettings()">⚙️ SETTINGS</div>
+
+    <!-- Main Game Container -->
     <div class="container">
       <button id="startBtn" class="btn">Start Test [Enter]</button>
       <button id="pauseBtn" class="btn hidden">Pause [ESC]</button>
@@ -249,8 +488,7 @@
     </div>
 
     <script>
-      // ————— GAME LOGIC (unchanged) —————
-
+      // Mobile Detection & Viewport Handling
       let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       let visualViewport = window.visualViewport;
 
@@ -264,6 +502,7 @@
           }
         });
       }
+
       document.addEventListener(
         "touchmove",
         (e) => {
@@ -272,6 +511,7 @@
         { passive: false }
       );
 
+      // Text Samples
       const texts = [
         "Swell bananas, jazz cats! Let's twist again like we did last summer!",
         "Hot diggity dog! The Charleston is the bee's knees, daddy-o!",
@@ -335,6 +575,7 @@
         "We're off to the races, slick as a whistle!",
       ];
 
+      // Game State Variables
       let currentText = "";
       let currentIndex = 0;
       let startTime, pauseTime, timerInterval;
@@ -343,6 +584,7 @@
       let totalTyped = 0;
       let correctTyped = 0;
 
+      // DOM Elements
       const elements = {
         startBtn: document.getElementById("startBtn"),
         pauseBtn: document.getElementById("pauseBtn"),
@@ -360,6 +602,7 @@
         restartBtn: document.getElementById("restartBtn"),
       };
 
+      // Game Functions
       function initTest() {
         currentText = texts[Math.floor(Math.random() * texts.length)];
         currentIndex = 0;
@@ -448,6 +691,9 @@
             currentLetter.classList.remove("incorrect");
             currentIndex++;
             updateCurrentLetter();
+
+            // Trigger comic animation on correct input
+            spawnComic();
           } else {
             currentLetter.classList.add("incorrect");
             currentLetter.style.animation = "shake 0.5s";
@@ -501,6 +747,7 @@
         }
       }
 
+      // Event Listeners
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && isTestActive) togglePause();
         else if (e.key === "Enter" && !isTestActive) startCountdown();
@@ -519,11 +766,18 @@
         initTest();
       });
 
-      initTest();
-
-      // ————— COMIC POP-IN OVERLAY —————
+      // Comic Animation System (From Code 1)
       const overlay = document.getElementById("animation-overlay");
-      const comicTexts = ["BANG!", "POW!", "WHAM!", "ZAP!", "BOOM!"];
+      const comicTexts = [
+        "BANG!",
+        "POW!",
+        "WHAM!",
+        "ZAP!",
+        "BOOM!",
+        "KAPOW!",
+        "CRASH!",
+        "SMASH!",
+      ];
 
       const vintageColors = [
         "#704214", // sepia
@@ -543,22 +797,82 @@
         el.textContent =
           comicTexts[Math.floor(Math.random() * comicTexts.length)];
 
-        // Position
+        // Position randomly on screen
         el.style.left = Math.random() * (window.innerWidth - 200) + "px";
         el.style.top = Math.random() * (window.innerHeight - 100) + "px";
 
-        // Apply vintage style
+        // Apply vintage styling
         el.style.color =
           vintageColors[Math.floor(Math.random() * vintageColors.length)];
-        el.style.fontSize = `${Math.random() * 1.5 + 2.5}rem`; // 2.5–4rem
-        el.style.transform = `rotate(${Math.random() * 30 - 15}deg)`; // -15° to +15°
+        el.style.fontSize = `${Math.random() * 1.5 + 2.5}rem`;
+        el.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
 
         overlay.appendChild(el);
-        setTimeout(() => overlay.removeChild(el), 1500);
+        setTimeout(() => {
+          if (overlay.contains(el)) {
+            overlay.removeChild(el);
+          }
+        }, 1500);
       }
 
-      // spawn every 400–800ms
-      setInterval(spawnComic, Math.random() * 400 + 400);
+      // Random comic effects (less frequent than Code 1)
+      setInterval(() => {
+        if (Math.random() > 0.85) {
+          // Only 15% chance every interval
+          spawnComic();
+        }
+      }, 600); // Slightly longer interval
+
+      // Theme Management (From Code 2)
+      const themeSelector = document.getElementById("theme-selector");
+      const faviconLink = document.getElementById("favicon");
+      const favicons = {
+        comic: "images/Faviconcomic.jpg",
+        bw: "images/FaviconBW.jpg",
+        "70s": "images/Favicon70s.jpg",
+      };
+
+      function applyTheme(theme) {
+        document.body.className = document.body.className.replace(
+          /theme-\w+/g,
+          ""
+        );
+        document.body.classList.add(`theme-${theme}`);
+        faviconLink.href = favicons[theme];
+      }
+
+      themeSelector.addEventListener("change", (e) => {
+        applyTheme(e.target.value);
+        localStorage.setItem("theme", e.target.value);
+      });
+
+      // Font Settings (From Code 2)
+      function setFont(fontType) {
+        // Remove existing font classes
+        document.body.className = document.body.className.replace(
+          /font-\w+/g,
+          ""
+        );
+        document.body.classList.add(`font-${fontType}`);
+        localStorage.setItem("selectedFont", fontType);
+      }
+
+      function toggleSettings() {
+        document.querySelector(".settings-panel").classList.toggle("open");
+      }
+
+      // Initialize on Load
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "comic";
+        const savedFont = localStorage.getItem("selectedFont") || "original";
+
+        themeSelector.value = savedTheme;
+        applyTheme(savedTheme);
+        setFont(savedFont);
+      });
+
+      // Initialize the test
+      initTest();
     </script>
   </body>
 </html>
