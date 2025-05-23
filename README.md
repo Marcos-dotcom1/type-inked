@@ -1,51 +1,23 @@
-# ✒️ Type Inked
+# Type Inked 🎨🖋️
 
-[**Type Inked**](https://type-inked.vercel.app/) is a vintage-inspired typing test designed to blend nostalgic aesthetics with smooth, responsive modern functionality. It’s a clean, minimal experience meant for people who appreciate classic visuals without losing performance or clarity.
+Welcome to **Type Inked** — the classiest, most unapologetically cool vintage typing effect generator you didn’t know you needed, but now you’ll pretend you always wanted.
 
----
+## 📖 What’s this thing?
+
+A website that slaps a typewriter effect onto your text like it’s 1965 and you’re Ernest Hemingway on a deadline. No complicated setups, no bloated features, no unnecessary clutter. Just type your stuff, hit the button, and watch it type itself out like it means business.
 
 ## 🎨 Features
 
-* **Vintage-Inspired Design**
-  A sleek, typewriter-like interface with retro black & white visuals that instantly set a timeless mood.
+* **Vintage Typewriter Effect:** Your text, typed out letter by letter. Smooth. Old-school.
+* **Theme Toggle:** Dark mode because obviously, and a clean mode if you're feeling wholesome. No neon yellows assaulting your retinas. Also; Comic.
+* **Customizable Text Input:** Write whatever you want. Go wild. Quote Nietzsche, write passive-aggressive breakup messages, or just type “beans” on repeat.
+* **Fast as Hell:** Loads quick. No waiting. Life’s too short.
 
-* **Real-Time Typing Metrics**
-  See your **Words Per Minute (WPM)**, **accuracy**, and **elapsed time** update live as you type.
+## ✨ Why Does This Exist?
 
-* **Customizable Fonts**
-  Switch between different font styles:
+Because most text animation tools are either boring, ugly, or made by someone who thinks Comic Sans is a personality trait. I wanted something clean, simple, and a little moody. So I built it.
 
-  * **Original**: Classic typewriter look
-  * **Arial**: Clean and modern
-  * **Random**: (Optional — for those who like surprises)
-
-* **Keyboard Controls**
-
-  * Press **\[Enter]** to start or restart the test
-  * Press **\[ESC]** to pause the test
-
-* **Minimal Distractions**
-  Clean layout with no clutter — just you, the text, and your stats.
-
-* **Responsive Design**
-  Optimized for all screen sizes — enjoy it on desktop, tablet, or phone without compromising the look or feel.
-
-* **Vintage Accuracy Feedback**
-  Typed words are dynamically color-coded to show correctness in real-time, enhancing focus without overwhelming you.
+Now it exists. And it’s glorious.
 
 ---
 
-## ⚙️ Future Improvements (Optional Ideas)
-
-* Word count settings (30, 50, 100 word modes)
-* Custom text selection
-* Optional dark mode variation (vintage green-on-black terminal look?)
-* High score tracking
-
----
-
-## 📌 Try It Out
-
-👉 [https://type-inked.vercel.app/](https://type-inked.vercel.app/)
-
----
