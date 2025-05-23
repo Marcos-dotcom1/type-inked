@@ -7,15 +7,7 @@ A summary of key areas to improve across all pages to enhance user experience an
 ## 🏠 Design
 
 - Starting with enter after done doesnt work
-
----
-
-## 🚀 Mobile
-
-- button and font size
-- keyboard doesnt appear
-- cannot unpause
-- responsive button can pause when responsive mode but not in normal mode
+- change custom animations
 
 ---
 
