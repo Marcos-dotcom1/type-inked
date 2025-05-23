@@ -7,7 +7,6 @@ A summary of key areas to improve across all pages to enhance user experience an
 ## 🏠 Design
 
 - Starting with enter after done doesnt work
-- remove edges from settings button
 
 ---
 
